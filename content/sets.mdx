@@ -1,0 +1,148 @@
+---
+title: 'Sets'
+description: 'This is the meta description for this page'
+---
+
+Sets são **coleções não-ordenadas** de itens **ÚNICOS**, embora um Set possa ser modificado, os elementos contidos dentro do Set devem ser imutáveis. Sets são definidos por valores separados por vírgula dentro de **{}**. Cuidado para não confundir os Sets com os dicionários!
+
+Talvez você lembre dos Sets através da **[famosa teoria matemática dos conjuntos](https://pt.wikipedia.org/wiki/Teoria_dos_conjuntos)**
+
+![img](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Venn_A_subset_B.svg/150px-Venn_A_subset_B.svg.png)
+
+Os Sets podem ser usados para executarmos operações matemáticas de conjuntos como **união**, **intersecção**, **diferença simétrica**, etc.
+
+ 
+
+## Definindo um Set
+
+```python
+s = {1,1,2,3,3,4}
+print(type(s))  # <class 'set'>
+print(s) # {1, 2, 3, 4} Veja que os valores repetidos foram eliminados
+```
+
+Também podemos criar através do método **set()**
+
+```python
+k = set([1,2,3,4,5])
+print(type(k)) # <class 'set'>
+print(k) # {1, 2, 3, 4, 5}
+```
+
+ 
+
+## Operações com Sets
+
+O método **add()** nos possibilita adicionar um item ao Set
+
+```python
+k.add(8)
+print(k) # {1, 2, 3, 4, 5, 8}
+```
+
+O método **discard()** nos permite remover itens de um Set
+
+```python
+s.discard(1)
+print(s) # {2, 3, 4}
+```
+
+Para remover todos os elementos do Set podemos usar o método **clear()**
+
+```python
+k.clear()
+print(k) # set()
+```
+
+Vamos agora definir dois novos Sets `x` e `y` para testarmos **novas operações**
+
+```python
+x = {1,2,3}
+y = {2,3,4}
+```
+
+### Intersecção
+
+Para intersecção podemos usar `&` ou o método **intersection()**
+
+![img](https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Venn0001.svg/220px-Venn0001.svg.png)
+
+```python
+print(x & y) # {2, 3}
+print(x.intersection(y)) # {2, 3}
+```
+
+### Diferença
+
+Para diferença podemos usar `-` ou o método **difference()**
+
+![img](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Venn0100.svg/220px-Venn0100.svg.png)
+
+```python
+# Relativo a x
+print(x - y) # {1}
+x.difference(y) # {1}
+
+# Relativo a y
+print(y - x) # {4}
+y.difference(x) # {4}
+```
+
+### Diferença Simétrica
+
+Para diferença simétrica podemos usar `^` ou o método **symmetric_difference()**
+
+![img](https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Venn0110.svg/220px-Venn0110.svg.png)
+
+```python
+# Todos imprimem o mesmo resultado, uma vez que a diferença é simétrica
+
+print(x.symmetric_difference(y)) # {1, 4}
+print(y.symmetric_difference(x)) # {1, 4}
+print(x ^ y) # {1, 4}
+print(y ^ x) # {1, 4}
+```
+
+### União
+
+Para união podemos usar `|` ou o método **union()**
+
+![img](https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Venn0111.svg/220px-Venn0111.svg.png)
+
+```python
+print(x | y) # {1, 2, 3, 4}
+print(x.union(y)) # {1, 2, 3, 4}
+```
+
+### Verificando a presença de um Elemento
+
+```python
+print(1 in x) # True
+print(5 in x) # False
+```
+
+ 
+
+## Referência Sets
+
+Os Sets nos trazem diversas funcionalidades e nos permitem resolver diversos problemas, para conhecer mais detalhes sobre eles visite a **[documentação](https://docs.python.org/3/tutorial/datastructures.html#sets)**
+
+| Método                        | Descrição                                                                      |
+|-------------------------------|:  --:|
+| add()                         | Adiciona um elemento ao set                                                    |
+| clear()                       | Remove todos os elementos do set                                               |
+| copy()                        | Retorna uma cópia do set                                                       |
+| difference()                  | Retorna um set contendo a diferença entre dois ou mais sets                    |
+| difference_update()           | Remove os itens desse set que também estão incluídos em outro set especificado |
+| discard()                     | Remove um item específico                                                      |
+| intersection()                | Retorna um set que é intersecção entre dois sets                               |
+| intersection_update()         | Remove os itens desse set que não estão presente em outro set especificado     |
+| isdisjoint()                  | Retorna se dois sets possuem intersecção ou não                                |
+| issubset()                    | Retorna se outro set contém esse set ou não                                    |
+| issuperset()                  | Retorna se esse set contém outro set ou não                                    |
+| pop()                         | Remove o item especificado                                                     |
+| remove()                      | Remove o item especificado                                                     |
+| symmetric_difference()        | Retorna um set com a diferença simétrica de dois sets                          |
+| symmetric_difference_update() | Insere a diferença simétrica desse set e outro                                 |
+| union()                       | Retorna um set contendo a união de sets                                        |
+| update()                      | Atualiza o set com a união desse set e outros                                  |

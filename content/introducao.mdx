@@ -1,0 +1,199 @@
+---
+title: 'Introdução'
+description: 'Capítulo Introdutório'
+---
+
+Python é uma linguagem de programação **[interpretada](https://pt.wikipedia.org/wiki/Linguagem_interpretada)**, **[de alto nível](https://pt.wikipedia.org/wiki/Linguagem_de_programação_de_alto_nível)**, que pode ser aplicada em diversas soluções. Famosa por sua sintaxe amigável, ela vem ganhando uma expressiva popularidade nos últimos anos. Foi criada por Guido Van Rossum no
+período de 1985-1990, seu código fonte está disponível sob o **GNU General Public License (GPL)**. Python conta com uma **[tipagem dinâmica](https://pt.wikipedia.org/wiki/Sistema_de_tipos)** e um sistema de gerenciamento de memória automático, sendo capaz de suportar múltiplos **[paradigmas de programação](https://pt.wikipedia.org/wiki/Paradigma_de_programação)**.
+
+Python é uma linguagem poderosa e de fácil aprendizado. Possui **[estruturas de dados](https://pt.wikipedia.org/wiki/Estrutura_de_dados)** eficientes e de alto nível e uma simples e efetiva abordagem em relação à **[programação orientada a objetos](https://pt.wikipedia.org/wiki/Programação_orientada_a_objetos)**. A sintaxe elegante de Python e sua **tipagem dinâmica**, juntamente com sua natureza interpretada, faz do Python uma linguagem ideal para *scripting* e desenvolvimento rápido de aplicações em muitas áreas e para diversas plataformas.
+
+O **interpretador** Python e a extensiva **[standard library](https://docs.python.org/3/library/)** estão disponíveis gratuitamente na forma *source* ou *binary* para todas as maiores plataformas através do **[site oficial Python](https://www.python.org/)**
+
+ 
+
+## As principais aplicações de Python são:
+
+- Desenvolvimento web **[(lado do servidor)](https://pt.wikipedia.org/wiki/Server-side)**
+- Desenvolvimento de softwares em geral
+- Matemática e Computação Científica
+- Inteligência Artificial, **[Machine Learning](https://en.wikipedia.org/wiki/Machine_learning)**, **[Deep Learning](https://en.wikipedia.org/wiki/Deep_learning)**
+- **[Scripting](https://pt.wikipedia.org/wiki/Linguagem_de_script)** e automação de tarefas repetitivas
+- Testes de software
+
+ 
+
+## Por que aprender Python?
+
+- Python é capaz de rodar em múltiplas plataformas (**Windows**, **Linux**, **MacOS**, **Raspberry Pi**, etc)
+- Python suporta **programação interativa** (Interação direta com o interpretador)
+- Sua sintaxe é simples de compreender
+- Suporta múltiplos **[paradigmas de programação](https://pt.wikipedia.org/wiki/Paradigma_de_programação)**
+- Python pode ser usada para prototipação rápida
+- Python está apta a se conectar com sistemas de **[banco de dados](https://pt.wikipedia.org/wiki/Banco_de_dados)**, pode também ler e modificar arquivos
+- Pode ser utilizada para lidar com grandes quantidades de dados e executar cálculos matemáticos complexos
+- Python conta com uma comunidade gigantesca e muito material de aprendizado!
+
+ 
+
+## Importante
+
+- A versão mais recente de Python é o Python 3, no qual iremos utilizar nesse guia, porém a versão Python 2 ainda é muito popular, embora atualmente só esteja recebendo atualizações de segurança
+- Python pode ser integrada com **C**, **C++**, **CORBA**, **Java**. Caso haja a necessidade de trabalhar com códigos de alta perfomance
+- Atualmente muitas das grandes corporações utilizam Python, podemos citar elas: **Google**, **Facebook**, **Microsoft**, **NASA**, **CERN**.
+
+ 
+
+# Computação
+
+![img](https://media2.giphy.com/media/8YBpKSm3uPWG9Ca0F4/giphy.gif)
+
+Uma breve Introdução à Computação
+
+## O que seria?
+
+- Representação de conhecimento através de **Estruturas de Dados**
+- **Iteração** e **Recursão** como metáforas computacionais
+- **Abstração** de procedimentos e tipos de dados
+- **Organizar** e **Modularizar** sistemas utilizando objetos classes e métodos
+- Diferentes classes de **algoritmos** (searching, sorting)
+- **Complexidade** de algoritmos
+
+## O que um Computador faz?
+
+- Fundamentalmente
+    - Realiza cálculos (bilhões de cálculos por segundo)
+    - É capaz de lembrar resultados (centenas de gigabytes de storage)
+
+- Quais tipos de cálculos?
+    - Pré-construídos na linguagem
+    - Aqueles que você define como programador
+
+- **Computadores** apenas sabem o que dizemos a eles
+
+## Tipos de Conhecimento
+
+- **Conhecimento Declarativo** é uma afirmação de um fato
+    - Está chovendo lá fora
+
+- **Conhecimento Imperativo** é uma **receita** ou "tutorial"
+    - Gabriel se inscreve para um sorteio
+    - Gabriel começa a pensar
+    - Gabriel escolhe um número aleatório entre 1 e 10
+    - Gabriel acerta o número
+
+## Exemplo Numérico
+
+- A raiz quadrada de um número **x** é **y** de forma que `y*y = x`
+
+- Receita para deduzir a raiz quadrada de um número **x**
+
+1. Comece com uma suposição **g**
+2. Se `g*g` é próximo o suficiente de **x**, pare e diga que **g** é a resposta
+3. Caso contrário faça uma nova suposição calculando a média de **g** e **x/g**
+4. Utilizando a nova suposição, repita o processo até se aproximar
+
+| g      | g*g     | x/g   | (g+x/g)/2 |
+|--------|---------|-------|-----------|
+| 3      | 9       | 16/3  | 4.17      |
+| 4.17   | 17.36   | 3.837 | 4.0035    |
+| 4.0035 | 16.0277 | 3.997 |  4.000002 |
+
+## O que é uma Receita?
+
+- Uma sequência de simples passos
+- Processo de **Controle de fluxo** que específica quando cada passo é executado
+- Um meio de determinar quando parar
+
+1+5+7 = UM **ALGORITMO**!
+
+## Computadores são Máquinas
+
+- Como capturar uma receita em um processo mecânico
+
+- Computador de **Programa Fixo**
+    - Calculadora
+
+- Computador de **Programa Armazenado**
+    - Máquina armazena e executa instruções
+
+## Arquitetura Básica do Computador
+
+![img](https://i.imgur.com/btawhB6.png)
+
+## Computador de Programa Armazenado
+
+- Sequência de Instruções armazenadas dentro do computador
+    - Construídos através de um conjunto pré-definido de instruções primitivas
+        1. Aritmética e Lógica
+        2. Testes simples
+        3. Movendo dados
+
+- Programa Especial (Interpretador) **executa cada instrução em ordem**
+    - Usa testes para alterar o fluxo de control através de sequência
+    - Para quando estiver pronto
+
+## Primitivos Básicos
+
+- Turing mostrou que podemos **computar tudo** utilizando 6 primitivos
+- Linguagens de programação modernas possuem conjuntos de primitivos mais convenientes
+- Pode abstrair métodos para criar **novos primitivos**
+- Qualquer cálculo computável em uma linguagem é computável em qualquer outra linguagem de programação
+
+## Criando Receitas
+
+- Uma linguagem de programação fornece um conjunto de **operações** primitivas
+- **Expressões** são complexas, mas combinações legais de primitivos em uma linguagem de programação
+- Expressões e Computações possuem **valores** e **sentido** em uma linguagem de programação
+
+## Aspectos das Linguagens
+
+- Constructos Primitivos
+    - Português: palavras
+    - Linguagem de programação: números, strings, operadores simples
+- **Sintaxe**
+    - Português: "gato cachorro garoto" -> invalida sintaticamente
+              "gato abraça o garoto" -> valida sintaticamente
+    - Linguagem de Programação: "oi"5 -> invalida sintaticamente
+                                3.2*5 -> valida sintaticamente
+- **Semântica Estática** no qual strings sintaticamente válidas possuem sentido
+    - Português: "Eu fome" -> valida sintaticamente, porém com erro de semântica
+    - Linguagem de Programação: 3.2*5 -> valida sintaticamente
+                                3+"oi" -> erro de semântica
+- **Semântica** é o sentido associado com uma string de símbolos sintaticamente correta com nenhum erro de semântica
+    - Português: pode ter muitos sentidos "aviões voadores podem ser perigosos"
+    - Linguagem de Programação: Possui apenas um sentido, porém talvez não seja a intenção do programador
+    
+## Quando Ocorrem Erros
+
+- Erros de Sintáxe
+    - Comuns e fáceis de perceber
+
+- Erros de Semântica Estática
+    - Algumas linguagens checam por eles antes de rodar o programa
+    - Pode causar comportamento imprevisível
+
+- Nenhum erro de Semântica, porém um sentido diferente do que o programador desejava
+    - Programa crasha, para de rodar
+    - Programa roda para sempre
+    - Programa dá uma resposta, porém diferente do esperado
+
+## Programas em Python
+
+- Um programa é uma sequência de definições e comandos
+    - Definições avaliadas
+    - Comandos executados pelo Interpretador Python em uma shell
+- Comandos (afirmações) instruem o interpretador a fazerem algo
+- Podem ser digitados diretamente em uma shell ou guardados em um arquivo que é então lido na shell e avaliado
+
+## Objetos
+
+- Programas manipulam **objetos de dados**
+- Objetos possuem um **tipo** que define os tipos de ações que os programas podem fazer com eles
+    - Gabriel é um humano, sendo assim ele pode caminhar, falar, etc.
+    - Pepe é um cachorro, sendo assim ela pode latir, rosnar, etc.
+- Objetos são
+    - Escalares (não podem ser subdivididos)
+    - Não-Escalares (possui uma estrutura interna que pode ser acessada)
+
+Agora que temos informações fundamentais básicas sobre a linguagem **Python**, vamos iniciar a configuração de nosso Ambiente de Programação.

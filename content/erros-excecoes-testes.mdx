@@ -1,0 +1,371 @@
+---
+title: 'Erros, Exceções e Testes'
+description: 'This is the meta description for this page'
+---
+
+É muito comum encontrarmos erros ao escrevermos programas, o **Interpretador Python** é capaz de gerar **exceções** quando encontra erros, por exemplo uma **divisão por zero**. Um dos erros mais comuns de encontrarmos é o de síntaxe, quando não seguimos a estrutura correta da linguagem, chamamos esse erro de erro de síntaxe. Por exemplo:
+
+```python
+if 2 > 1 
+    print("Dois maior do que um")
+
+# File "<stdin>", line 1
+# if 2 >1
+#          ^
+# SyntaxError: invalid syntax
+```
+
+Perceba, que de propósito, omitimos o **:** e o interpretador nos retorna um erro de **síntaxe inválida**
+
+Além disso, erros também podem acontecer em **tempo de execução**, nesse caso eles são conhecidos como **exceções**. Eles ocorrem, por exemplo quando um arquivo que estamos tentando abrir não existe **(FileNotFoundError)**, dividir por zero **(ZeroDivisionError)**, módulos que tentamos importar e não são encontrados **(ImportError)** e uma série de outros. Quando esses erros em tempo de execução ocorrem, **Python** cria um objeto de exceção, e caso este não seja tratado de maneira própria, será impresso um **traceback** daquele erro e mais detalhes do motivo que ocorreu.
+
+```python
+x = 1/0
+
+# Traceback (most recent call last):
+# File "<stdin>", line 1, in <module>
+# ZeroDivisionError: division by zero
+
+f = open("arquivo.txt") # Abrindo arquivo que não existe em nosso sistema de arquivos
+
+# Traceback (most recent call last):
+# File "<stdin>", line 1, in <module>
+# FileNotFoundError: [Errno 2] No such file or directory: 'arquivo.txt'
+```
+
+
+
+## Exceções Construídas no Python
+
+Operações ilegais poderam gerar exceções, existem diversas exceções construídas em **Python** que são geradas quando erros correspondentes ocorrem, para vermos elas precisamos usar a função **locals()**
+
+```python
+e = locals()['__builtins__']
+print(dir(e))
+print(type(e))
+```
+
+Como podemos ver, essa função nos retornará um **<class 'module'>** com exceções construídas, funções e atributos. Algumas das exceções mais comuns são listadas a seguir:
+
+| Exceção               | Causa                                                                                                                         |
+|-----------------------|:----------:|
+| AssertionError        | Surge quando o comando assert falha                                                                                           |
+| AttributeError        | Surge quando uma atribuição ou referência falha                                                                               |
+| EOFError              | Surge quando a função input() chega na condição de fim de arquivo                                                             |
+| FloatingPointError    | Surge quando uma operação de ponto flutuante falha                                                                            |
+| GeneratorExit         | Surge quando o método close() do gerador é chamado                                                                            |
+| ImportError           | Surge quando o módulo importado não é encontrado                                                                              |
+| IndexError            | Surge quando o índice de uma sequência está fora de alcance                                                                   |
+| KeyError              | Surge quando uma chave não é encontrada no dicionário                                                                         |
+| KeyboardInterrupt     | Surge quando um usuário aperta o botão de interrupção (CTRL + C ou delete)                                                    |
+| MemoryError           | Surge quando acaba a memória de uma operação                                                                                  |
+| NameError             | Surge quando uma variável não é encontrada no escopo local ou global                                                          |
+| NotImplementedError   | Surge por métodos abstratos                                                                                                   |
+| OSError               | Surge quando alguma operação de sistema causa algum erro de sistema                                                           |
+| OverflowError         | Surge quando uma operação aritmética é muito grande para ser representada                                                     |
+| ReferenceError        | Surge quando um proxy de referência fraco é usado para acessar um garbage collected referente                                 |
+| RuntimeError          | Surge quando um erro não se encaixa em nenhuma outra categoria                                                                |
+| StopIteration         | Surge pela função next() para indicar que não há mais itens para o iterador retornar                                          |
+| SyntaxError           | Surge pelo parser quando um erro de síntaxe ocorre                                                                            |
+| IndentationError      | Surge quando não indentamos nosso código                                                                                      |
+| TabError              | Surge quando a indentação consiste de espaços e tabs impróprios                                                               |
+| SystemError           | Surge quando o interpretador detecta um erro interno                                                                          |
+| SystemExit            | Surge pela função sys.exit()                                                                                                  |
+| TypeError             | Surge quando uma função ou operação é aplicada a um objeto de tipo incorreto                                                  |
+| UnboundLocalError     | Surge quando uma referência é feita para uma variável local em uma função ou método, porém nenhum valor está preso à variável |
+| UnicodeError          | Surge quando existe um erro relacionado a Unicode codificação ou decodificação                                                |
+| UnicodeEncodeError    | Surge quando um erro de codificação de Unicode ocorre                                                                         |
+| UnicodeDecodeError    | Surge quando um erro de decodificação de Unicode ocorre                                                                       |
+| UnicodeTranslateError | Surge quando um erro de tradução de Unicode ocorre                                                                            |
+| ValueError            | Surge quando uma função pega um argumento de tipo correto, porém de valor impróprio                                           |
+| ZeroDivisionError     | Surge quando a segunda divisão ou módulo é zero                                                                               |
+
+Além delas, podemos definir **nossas próprias exceções**, caso necessário, e para lidarmos com elas utilizamos as palavras-chave **try**, **except** e **finally**.
+
+| Palavra-chave | Descrição                                                               |
+|---------------|:----------------------------------:|
+| try           | nos permite testar um bloco de código por erros                         |
+| except        | permite lidarmos com erros                                              |
+| finally       | permite executarmos códigos independente do resultado do try e do except |
+
+
+
+## Lidando com Exceções
+
+```python
+try:
+    print(x)
+except:
+    print("Uma exceção ocorreu")
+```
+
+O bloco **try** irá gerar uma exceção, uma vez que **x** não está definida, uma vez gerada, o bloco **except** é executado, caso não tivéssemos o bloco **try** o programa iria *crashar* e um erro surgiria. Podemos também definir diversos blocos de exceção.
+
+```python
+try:
+    print(x)
+except NameError:
+    print("Variável x não está definida")
+except:
+    print("Algum outro erro ocorreu")
+```
+
+O bloco **finally**, se especificado, será executado independente de surgir ou não um erro no **try**
+
+```python
+try:
+    print(x)
+except:
+    print("Algum erro ocorreu")
+finally:
+    print("O try e except foram finalizados")
+```
+
+```python
+try:
+	a = int(input('Diga-me um número: '))
+	b = int(input('Diga-me um outro número: '))
+	print(a/b)
+except:
+	print('erro no input do usuário')
+```
+
+### Lidando com Exceções Específicas
+
+Tenha claúsulas de **except** separadas para lidar com um tipo particular de exceção
+
+```python
+try:
+	a = int(input('Diga-me um número: '))
+	b = int(input('Diga-me um outro número: '))
+	print("a/b = ", a/b)
+	print("a+b = ", a+b)
+except ValueError: # Só executa se esse erro surgir
+	print('Não podemos converter para um número')
+except ZeroDivisionError: # Só executa se esse erro surgir
+	print('Não podemos dividir por zero')
+except: # executa para todos os outros erros
+	print('algo de muito errado aconteceu')
+```
+
+### O que fazer com Exceções?
+
+- O que fazer quando encontrar um erro?
+
+- Falhar silenciosamente
+	- Substituir valores padrão ou apenas continuar
+	- Má ideia! usuários não obtem avisos
+
+- Retornar um valor erro
+	- Qual valor escolher?
+	- Complica o código tendo de checar por um valor especial
+
+- Parar a execução, condição de sinalização de erro
+	- Em Python: *raise* uma exceção
+	raise Exception('string descritiva do erro')
+
+
+
+## Testes, Debugging, Assertions
+
+### Programação Defensiva
+
+- Escrever **especificações** para as funções
+- **Modularizar** programas
+- Checar **condições** em inputs/outputs (*assertions*)
+
+### Testando/Validando
+
+- **Comparar** pares de input/output a uma especificação
+- "Não está funcionando!"
+- "Como eu posso 'quebrar' o meu programa?"
+
+### Debugging
+
+- **Estudar Eventos** que levam a um erro
+- "Por que não está funcionando?"
+- "Como eu posso consertar meu programa?"
+
+
+
+## Mentalidade para Testing e Debugging
+
+- Dividir o programa em **módulos** que possam ser testados e debuggados individualmente
+- **Documentar especificações** nos módulos
+	- O que você espera que o input seja?
+	- O que você espera que o output seja?
+- **Documentar suposições** envolvidas no design do código
+
+
+
+## Quando você está pronto para testar?
+
+- Tenha certeza que o código está rodando
+	- Remova erros de sintaxe
+	- Remova erros semântico estático
+	- O interpretador Python normalmente pode encontrar esses erros para você
+- Tenha um conjunto de resultados esperados
+	- Um conjunto de input
+	- Para cada input, um output esperado
+
+
+
+## Classes de Testes
+
+- Teste Unitário
+	- Valida cada peça do programa	
+	- Testa cada função separadamente
+
+- Testa de Regressão
+	- Adicione testes para bugs conforme você os encontra
+	- Capture erros reintroduzidos que foram previamente corrigidos
+
+- Teste de Integração
+	- O programa completo funciona?
+	- Normalmente tende-se a vir direto para esta etapa
+
+
+
+## Debugging
+
+- Linha de aprendizado íngrime
+- Objetivo é termos um programa livre de bugs
+- Ferramentas
+	- Pré-construída no IDLE e Anaconda
+	- Python Tutor
+	- o statement print
+
+### Statement Print
+
+- Uma boa maneira de testar hipóteses
+- Quando usar print
+	- entrada da função
+	- parâmetros
+	- resultados de funções
+
+### Passos no Debugging
+
+- Estude o código de programa
+	- Não pergunte o que está errado
+	- Pergunte como eu obtive o resultado inesperado
+
+- Método científico
+	- Estude dados disponíveis
+	- Formule hipóteses
+	- Experimentos repetidos
+	- Pegue um input simples para testar
+
+
+
+## Assertions
+
+- Tenha certeza que suposições no estado da computação são como o esperado
+- Use um statement assert para invocar *raise* de uma exceção *AssertionError* caso as suposições não se concretizem
+- Um exemplo de boa **programação defensiva**
+
+## Exemplo
+
+```python
+def media(notas):
+	# A função encerrará imediatamente caso o assertion não seja concretizado
+	assert len(notas) != 0, 'nenhum dado para notas'
+	return sum(notas)/len(notas)
+```
+
+- *raises* um *AssertionError* se for dado uma lista vazia para notas
+- Caso contrário, roda normal
+
+Vamos agora criar algumas funções para testarmos
+
+```python
+def adicao(x, y):
+    """Função de Adição"""
+    return x + y
+
+def subtracao(x, y):
+    """Função de Subtração"""
+    return x - y
+
+def multiplicacao(x, y):
+    """Função de Multiplicação"""
+    return x * y 
+
+def divisao(x, y):
+    """Função de Divisão"""
+    if y == 0:
+    	raise ValueError("Não é possível dividir por zero")
+    return x / y
+```
+
+Salvamos o arquivo como `operacoes.py` e agora vamos criar nosso arquivo de testes `test_operacoes.py`
+
+```python
+import unittest
+import operacoes
+
+class TestCalc(unittest.TestCase):
+    def test_adicao(self):
+        self.assertEqual(calc.add(10, 5), 15)
+        self.assertEqual(calc.add(-1, 1), 0)
+        self.assertEqual(calc.add(-1, -1), -2)    
+
+    def test_subtracao(self):
+        self.assertEqual(calc.subtract(10, 5), 5)
+        self.assertEqual(calc.subtract(-1, 1), -2)
+        self.assertEqual(calc.subtract(-1, -1), 0)    
+
+    def test_multiplicacao(self):
+        self.assertEqual(calc.multiply(10, 5), 50)
+        self.assertEqual(calc.multiply(-1, 1), -1)
+        self.assertEqual(calc.multiply(-1, -1), 1)    
+
+    def test_divisao(self):
+        self.assertEqual(calc.divide(10, 5), 2)
+        self.assertEqual(calc.divide(-1, 1), -1)
+        self.assertEqual(calc.divide(-1, -1), 1)    
+        self.assertEqual(calc.divide(5, 2), 2.5)    
+
+        with self.assertRaises(ValueError): # Testando exceções -> ValueError
+        	calc.divide(10, 0)
+
+if __name__ == '__main__':
+	unittest.main()
+```
+
+Você deve ter observado que tivemos que importar a biblioteca **unittest** em nosso script, ela é muito importante pois permite testar cada função de uma forma que atribuamos os **resultados esperados**, caso os testes venham a falhar, sabemos que há algo de errado com a nossa função.
+
+Vamos agora executar o teste através do comando `python -m unittest test_operacoes.py`
+
+O resultado nos traz que os 4 testes foram executados com sucesso
+
+```
+Ran 4 tests in 0.001s
+
+OK
+``` 
+
+Além da biblioteca **unittest** também existem diversas outras, inclusive com funcionalidades mais avançadas, podemos citar por exemplo a biblioteca **pytest**.
+
+## Assertions como Programação Defensiva
+
+- Assertions não permitem o programador controlar a resposta para condições inesperadas
+- Tenha certeza que a execução páre quando uma condição esperada não é alcançada
+- Tipicamente usado para checar inputs a funções, porém pode ser usado em qualquer lugar
+- Pode ser usado para checar outputs de uma função para evitar propagação de valores ruins
+- Pode tornar mais fácil a localização da fonte de um bug
+
+## Onde usar Assertions?
+
+- Objetivo é encontrar bugs logo que introduzidos e tornar claro onde eles aconteceram
+- Use como um suplemento para testes
+- *raise* exceções caso usuários enviem dados de input ruins
+- Use assertions para:
+	- checar tipo de argumentos ou valores
+	- checar que invariantes em estruturas de dados são encontrados
+	- checar definições em valores retornados
+	- checar por violações de definições em um procedimento (exemplo: sem duplicatas em uma lista)
+
+
+
+Vimos que existem muitos erros e possibilidades deles ocorrerem em nosso programas, por isso é importante que tenhamos em mente a capacidade que **Python** nos traz de lidarmos com estes erros e além disso é essencial que tenhamos em mente a necessidade de testarmos nossos programas para termos sempre a melhor qualidade possível de *software*. Para mais detalhes esteja atento na **[documentação](https://docs.python.org/3/tutorial/errors.html)**
+
