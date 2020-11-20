@@ -1,19 +1,17 @@
 ---
 title: 'Funções'
-description: 'This is the meta description for this page'
+description: 'Aprenda sobre as Funções'
 ---
 
-Uma **função** é um bloco de código **organizado** e **reutilizável** que é capaz de realizar uma **determinada ação**. Funções nos ajudam a deixar o nosso código mais **modular**, trazendo a possibilidade de **reusabilidade**. Como vimos ao longo do guia, Python já nos traz várias funções pré-construídas, como por exemplo **print()** e **range()**, mas também é possível criarmos nossas próprias funções!
+Uma **função** é um bloco de código **organizado** e **reutilizável** que é capaz de realizar uma **determinada ação**. Funções nos ajudam a deixar o nosso código mais **modular**, trazendo a possibilidade de **reusabilidade**, conforme nosso programa fica cada vez maior, as funções o tornam mais organizado e gerenciável.
 
- 
+Como vimos ao longo do guia, Python já nos traz várias funções pré-construídas, como por exemplo **print()** e **range()**, mas também é possível criarmos nossas próprias funções!
 
 ## Anatomia das Funções
 
-Podemos imaginar as **funções** como um **mecanismo** capaz de receber valores como **input** e então realizar operações nesses valores e retornar um **output**
+Podemos imaginar as **funções** (de modo geral) como um **mecanismo** capaz de receber valores como **input** e então realizar operações nesses valores e retornar um **output**.
 
-![img](https://i.ibb.co/7KrmVPd/fun-es.png)
-
- 
+![img](https://raw.githubusercontent.com/the-akira/Python-Iluminado/master/Imagens/Function.png)
 
 ## Características das Funções
 
@@ -21,65 +19,106 @@ Podemos imaginar as **funções** como um **mecanismo** capaz de receber valores
 - Possuem **parâmetros** (0 ou mais)
 - Possuem **docstrings** (opcional, porém recomendado)
 - Possuem um **corpo**
-- **Retornam** algo
-
- 
+- **Retornam** algo (opcional)
 
 ## Definindo uma Função
 
-Para definir uma **função** é necessário que sigamos algumas regras
+Em Python devemos seguir a seguinte sintaxe para construirmos uma Função:
+
+```
+def nome_da_função(parametros):
+    """docstrings"""
+    <comandos>
+```
+
+Para definir uma **função** é necessário que sigamos algumas regras:
 
 - Bloco de funções começam com a palavra-chave **def** seguido do nome da função e parenteses **()**.
-- Parâmetros de input ou argumentos (dados fornecidos por nós) devem ser colocados entre parenteses **()**
-- A palavra-chave **return [expressão]** sai da função, opcionalmente passando um parâmetro para o chamador. O comando de retorno sem argumentos é o mesmo que return None
-- Opcionalmente podemos usar strings de documentação (docstrings) para descrever o que nossa função faz
+- O nome da função identifica exclusivamente a função. A nomenclatura de funções segue as mesmas regras de escrita de identificadores em Python.
+- Parâmetros de input ou argumentos (dados fornecidos por nós) devem ser colocados entre parenteses **()**. Eles são opcionais.
+- Dois pontos (`:`) para marcar o final do cabeçalho da função.
+- Opcionalmente podemos usar strings de documentação ([docstrings](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html)) para descrever o que nossa função faz.
+- Uma ou mais instruções Python válidas que constituem o corpo da função. As declarações devem ter o mesmo nível de indentação (geralmente 4 espaços).
+- O comando opcional `return (expressão)` sai da função, opcionalmente passando um parâmetro para o chamador. O comando de retorno sem argumentos é o mesmo que return `None`.
 
-Por exemplo:
+Por exemplo, vamos definir uma função capaz de converter uma temperatura em **Fahrenheit** para **Celsius**.
+
+![img](https://raw.githubusercontent.com/the-akira/Python-Iluminado/master/Imagens/PythonFunction.png)
 
 ```python
-def oi(nome):
+def fahr_to_celsius(temp):
+    """
+    Função que recebe como argumento uma temperatura
+    em Fahrenheit e converte ela para Celsius 
+    """
+    return ((temp - 32) * (5/9))
+```
+
+Uma vez que temos a função definida, agora podemos usá-la. Se quisermos obter ajuda, podemos contar com o comando **help()** que nos trará o docstrings dessa função.
+
+```python
+help(fahr_to_celsius)
+```
+
+Para invocar a função, devemos passar um valor para ela como argumento:
+
+```python
+print(fahr_to_celsius(91.76)) # 33.2
+print(fahr_to_celsius(101.3)) # 38.5
+```
+
+Como essa função tem valor de retorno, podemos armazenar o seu resultado em uma variável:
+
+```python
+celsius = fahr_to_celsius(70.76)
+print(celsius) # 21.53333333333334
+```
+
+Também podemos definir uma função que não irá retornar um valor, por exemplo:
+
+```python
+def cumprimentar(nome):
     """
     Essa função cumprimentará a pessoa passada por parâmetro
     """
     print("Olá {0} Seja bem-vindo".format(nome))
 ```
 
-A **função** foi criada e está definida, porém nada aconteceu. Para que ela possa funcionar precisamos **invocá-la**, para isso chamaremos ela por seu nome e passaremos os **parâmetros** requisitados por ela
+A **função** foi criada e está definida, porém nada aconteceu. Para que ela possa funcionar precisamos **invocá-la**, para isso chamaremos ela por seu nome e passaremos os **parâmetros** requisitados por ela:
 
 ```python
-oi("Gabriel") # Olá Gabriel Seja bem-vindo
+cumprimentar("Gabriel") # Olá Gabriel Seja bem-vindo
 ```
 
- 
+Observe que esta função apenas nos imprime uma string, uma vez que ela não tem valor de retorno.
 
-## Parâmetros padrão
+## Parâmetros Padrão
 
-Podemos definir **parâmetros padrão** para caso a função seja invocada sem nenhum parâmetro, estes preencherão as opções
+Podemos definir **parâmetros padrão** para caso a função seja invocada sem nenhum argumento passado, estes preencherão as opções.
 
 ```python
-def minha_func(valor=100):
+def padrao(valor=100):
+    """Função que apenas imprime um valor"""
     print("O valor definido foi: " + str(valor))
 
-minha_func()
-minha_func(10)
-minha_func(33)
+padrao() # 100
+padrao(10) # 10
+padrao(33) # 33
 ```
-
- 
 
 ## Docstring
 
-A primeira string depois do cabeçalho da função é chamada de docstring, é uma **string** usada para especificar a funcionalidade da nossa função, e embora seja opcional, vos lembro que documentar é uma importante prática de programação, uma vez que possivelmente outras pessoas estarão lendo nosso código, inclusive é importante até mesmo para você lembrar o que você fez! Caso queiramos ver o docstring de uma função
+A primeira string depois do cabeçalho da função é chamada de docstring, é uma **string** usada para especificar a funcionalidade da nossa função, e embora seja opcional, vos lembro que documentar é uma importante prática de programação, uma vez que possivelmente outras pessoas estarão lendo nosso código, inclusive é importante até mesmo para você lembrar o que você fez! 
+
+Caso queiramos ver o docstring de uma função, podemos acessar o atributo `__doc__`:
 
 ```python
-print(oi.__doc__)
+print(padrao.__doc__) # Função que apenas imprime um valor
 ```
 
- 
+## O Comando return
 
-## O comando return
-
-O comando **return** nos permite fazer com que a função retorne um valor e possamos armazená-lo em uma variável, por exemplo:
+Novamente, o comando **return** nos permite fazer com que a função retorne um valor e possamos armazená-lo em uma variável, por exemplo:
 
 ```python
 def func(x):
@@ -91,13 +130,21 @@ print(y) # 2
 print(z) # 3
 ```
 
- 
+Utilizando somente o **return**, nossa função retornará `None`:
+
+```python
+def func():
+    return 
+
+x = func()
+print(x) # None
+```
 
 ## Names
 
 Antes de falarmos sobre o conceito de **Namespace e Escopo** em Python, é importante entendermos os names(também conhecidos como **identifiers**), que são simplesmente um nome dado aos objetos. Lembre que tudo em Python é um objeto. Names são uma maneira de acessar os objetos.
 
-Por exemplo, quando fazemos a atribuição `x = 13`, nesse caso `13` é um objeto armazenado em memória e `x` é o **name** que este objeto está associado. Nós podemos obter o endereço(em RAM) de um objeto através da função construída em Python chamada `id()`, vejamos exemplos:
+Por exemplo, quando fazemos a atribuição `x = 13`, nesse caso `13` é um objeto armazenado em memória e `x` é o **name** que este objeto está associado. Nós podemos obter o endereço (em RAM) de um objeto através da função construída em Python chamada `id()`, vejamos exemplos:
 
 ```python
 x = 13
@@ -111,20 +158,16 @@ Observe que ambos se referem ao mesmo objeto, vamos agora considerar:
 ```python
 x = 13
 
-# id(x) = 10914880
-print(f'id(x) = {id(x)}')
+print(f'id(x) = {id(x)}') # id(x) = 10914880
 
 x = x + 1
 
-# id(x) = 10914912
-print(f'id(x) = {id(x)}')
-# id(x) = 10914912
-print(f'id(14) = {id(14)}')
+print(f'id(x) = {id(x)}') # id(x) = 10914912
+print(f'id(14) = {id(14)}') # id(x) = 10914912
 
 y = 13
 
-# id(13) = 10914880
-print(f'id(13) = {id(13)}')
+print(f'id(13) = {id(13)}') # id(13) = 10914880
 ```
 
 Veja que inicialmente um objeto `13` é criado e o name `x` é associado com ele, quando executamos a expressão `x = x + 1`, um novo objeto `14` é criado, e agora `x` é associado com esse objeto, tendo ele um novo endereço de memória, podemos confirmar essa afirmação ao verificarmos que `id(x)` e `id(14)` possuem o mesmo endereço.
@@ -143,10 +186,10 @@ Todas essas expressões são válidas e `x` irá referir-se à três diferentes 
 
 ```python
 def zero():
-	return 0
+    return 0
 
-z = zero()
-print(z)
+z = zero
+print(z()) # 0
 ```
 
 O name `z` definido por nós pode fazer referência a uma função e através dele podemos chamar a função.
@@ -157,9 +200,9 @@ Um **namespace** em Python é uma coleção de nomes. Portanto, um namespace é 
 
 No **namespace** há um mapeamento de nome para objeto, com os nomes como chaves e os objetos como valores. Diversos namespace podem usar o mesmo nome e mapeá-lo para um objeto diferente. Vejamos alguns exemplos de namespaces:
 
-- Namespace Local: Este namespace inclui nomes locais dentro de uma função. Este namespace é criado quando uma função é chamada e dura apenas até que a função retorne.
-- Namespace Global: Este namespace inclui nomes de vários módulos importados que você está usando em um projeto. É criado quando o módulo é incluído no projeto e dura até o final do script
-- Namespace Built-In: Este namespace inclui funções internas e nomes de exceção internos.
+- **Namespace Local**: Este namespace inclui nomes locais dentro de uma função. Este namespace é criado quando uma função é chamada e dura apenas até que a função retorne.
+- **Namespace Global**: Este namespace inclui nomes de vários módulos importados que você está usando em um projeto. É criado quando o módulo é incluído no projeto e dura até o final do script
+- **Namespace Built-In**: Este namespace inclui funções internas e nomes de exceção internos.
 
 Em Python, você pode então imaginar um namespace como um mapeamento de todos os nomes que você definiu para os objetos correspondentes.
 
@@ -263,6 +306,8 @@ x = 30
 
 Neste caso específico, todas as referências e atribuições são para a variável global `x` por causa do uso da palavra-chave `global`.
 
+O que ocorre então quando chamamos/invocamos uma função?
+
 - **Parâmetro formal** se conecta com o valor do **parâmetro real** quando a função é chamada
 - Um novo **escopo/quadro/ambiente** é criado quando entra uma função
 - **Escopo** é o mapeamento de nomes para objetos
@@ -270,9 +315,9 @@ Neste caso específico, todas as referências e atribuições são para a variá
 ```python
 # Definição da Função
 def f(x): # parâmetro formal
-	x += 1
-	print('Em f(x): x = ',x)
-	return x 
+    x += 1
+    print('Em f(x): x = ',x)
+    return x 
 
 # Código principal do Programa
 # -> Inicializa a variável x
@@ -280,58 +325,63 @@ def f(x): # parâmetro formal
 # -> atribui o retorno da função para a variável z
 x = 10
 z = f(x) # parâmetro real
-print(z)
+print(z) # 11
 ```
-
- 
 
 ## Funções como Argumentos
 
-- Argumentos podem assumir qualquer tipo, até mesmo funções
+Argumentos podem assumir qualquer tipo, até mesmo funções:
 
 ```python
 def func_a():
-	print('dentro da func_a')
+    print('dentro da func_a')
+
 def func_b(y):
-	print('dentro da func_b')
-	return y
+    print('dentro da func_b')
+    return y
+
 def func_c(z):
-	print('dentro da func_c')
-	return z()
+    print('dentro da func_c')
+    return z()
+
 print(func_a()) # chama a função func_a, não recebe parâmetros
 print(5+func_b(2)) # chama a função func_b, recebe um parâmetro
 print(func_c(func_a)) # chama a função func_c, recebe outra função como parâmetro
 ```
 
-- A função `func_a` retorna `None`
-- A função `func_b` retorna `2`
+Observe que:
+
+- A função `func_a` retorna `None`, pois ela apenas imprime uma string
+- A função `func_b` retorna `2` (valor que passamos via argumento)
 - A função `func_c` recebe a `func_a` como parâmetro, que por sua vez retorna `None`
 
- 
-
 ## Exemplo do Escopo
+
+Nem todas as variáveis são acessíveis a partir de todas as partes do nosso programa, e nem todas as variáveis existem durante o mesmo período de tempo. Onde uma variável é acessível e por quanto tempo ela existe depende de como é definida. Chamamos a parte de um programa onde uma variável está acessível de seu escopo, e a duração para a qual a variável existe seu tempo de vida.
+
+Uma variável que é definida dentro de uma função é local para essa função. Ela é acessível a partir do ponto em que foi definida até o final da função e existe enquanto a função estiver em execução. Os nomes dos parâmetros na definição da função se comportam como variáveis locais, mas contêm os valores que passamos para a função quando a chamamos. Quando usamos o operador de atribuição (`=`) dentro de uma função, seu comportamento padrão é criar uma nova variável local - a menos que uma variável com o mesmo nome já esteja definida no escopo local.
 
 - Dentro de uma função, **podemos acessar** uma variável definida fora dela
 - Dentro de uma função, **não podemos modificar** uma variável definida fora dela, na verdade podemos utilizando a variável **global**, mas normalmente não é o ideal
 
 ```python
 def f(y):
-	# x é redefinido no escopo de f
-	x = 1
-	x += 1
-	print(x)
+    # x é redefinido no escopo de f
+    x = 1
+    x += 1
+    print(x)
 
 x = 5
 f(x) # 2
 print(x) # 5
 ```
 
-- Nesse caso temos diferentes objetos `x`
+Neste caso temos diferentes objetos `x`, a função **f()** irá utilizar o **x** definido dentro dela e **print()** irá imprimir o objeto **x** global.
 
 ```python
 def g(y):
-	print(x)
-	print(x+1)
+    print(x)
+    print(x+1)
 
 x = 5
 g(x)
@@ -341,11 +391,11 @@ print(x)
 # 5
 ```
 
-- `x` dentro de `x` é capturado do mesmo escopo que chamou a função `g`
+Neste caso a função **g()** e **print()** vão usar o mesmo objeto **x** global.
 
 ```python
 def h(y):
-	x += 1
+    x += 1
 
 x = 5 
 h(x)
@@ -353,7 +403,45 @@ print(x)
 # UnboundLocalError: local variable 'x' referenced before assignment
 ```
 
- 
+Neste exemplo ocorrerá um erro, uma vez que a função **h()** está tentando modificar o objeto **x** antes mesmo dele ser definido.
+
+### A Função globals()
+
+Como o próprio nome indica, a função **globals()** exibirá informações de escopo global.
+Por exemplo, se abrirmos um console Python e inserirmos **globals()**, um dicionário incluindo todos os nomes e valores de variáveis no escopo global será retornado.
+
+Veja que estou usando `...` para abreviar o resultado:
+
+```python
+>>> globals()
+# {'__name__': '__main__', ..., '__builtins__': <module 'builtins' (built-in)>}
+```
+
+Se adicionarmos uma variável, ela agora será incluída no escopo global:
+
+```python
+x = 1
+globals()
+# {'__name__': '__main__', ...,  '__builtins__': <module 'builtins' (built-in)>, 'x': 1}
+```
+
+### A Função locals()
+
+Como o próprio nome indica, a função **locals()** retornará um dicionário incluindo todos os nomes e valores locais.
+
+```python
+def anime():
+    nome = 'Naruto'
+    print(locals())
+
+anime() # {'nome': 'Naruto'}
+```
+
+Se chamarmos a função **locals()** no escopo global, o resultado será idêntico ao resultado da função **globals()**, portanto esteja ciente disso quando usá-la:
+
+```python
+globals() is locals() # True
+```
 
 ## *args & **kwargs
 
@@ -365,10 +453,10 @@ As variáveis mágicas `*args` e `**kwargs` são normalmente usadas em definiç�
 
 ```python
 def soma(*args):
-	total = 0
-	for num in args:
-		total += num 
-	return total
+    total = 0
+    for num in args:
+        total += num 
+    return total
 
 print(soma(2,3,4,6)) # 15
 print(soma(2,3,4,6,5,5,5,1,2)) # 32
@@ -381,19 +469,16 @@ print(soma(2,3)) # 5
 
 ```python
 def pessoa(**kwargs):
-	print(kwargs)
-	for nome, idade in kwargs.items():
-		print(f'{nome} tem atualmente {idade} anos de idade')
+    print(kwargs)
+    for nome, idade in kwargs.items():
+        print(f'{nome} tem atualmente {idade} anos de idade')
 
 pessoa(gabriel='33', rafael='47', daniel='22')
-
 # {'gabriel': '33', 'rafael': '47', 'daniel': '22'}
 # gabriel tem atualmente 33 anos de idade
 # rafael tem atualmente 47 anos de idade
 # daniel tem atualmente 22 anos de idade
 ``` 
-
- 
 
 ## Recursão
 
@@ -402,25 +487,23 @@ pessoa(gabriel='33', rafael='47', daniel='22')
 Outro grande exemplo seria O Triângulo de Sierpinski - também chamado de Junta de Sierpinski - é uma figura geométrica obtida através de um processo **recursivo**. Ele é uma das formas elementares da geometria fractal por apresentar algumas propriedades, tais como: ter tantos pontos como o do conjunto dos números reais; ter área igual a zero; ser auto-semelhante (uma parte sua é idêntica ao todo); não perder a sua definição inicial à medida que é ampliado. Foi primeiramente descrito em 1915 por Waclaw Sierpinski (1882 - 1969), matemático polonês. 
 
 Imagem do Triângulo de Sierpinski: 
-![alt text](https://upload.wikimedia.org/wikipedia/commons/b/b7/SierpinskiTriangle.PNG "Triângulo de Sierpinski")
 
-Pensando de forma **computacional**
+![img](https://raw.githubusercontent.com/the-akira/Python-Iluminado/master/Imagens/Sierpinski.png "Triângulo de Sierpinski")
 
-- Algoritmicamente falando, **Recursão** Uma maneira de desenvolver soluções para problemas através de *divide-and-conquer* ou *decrease-and-conquer*
-	- Reduz o problema para versões simplificadas do mesmo problema
+Pensando de forma **computacional**:
+
+- Algoritmicamente falando, **Recursão** é uma maneira de desenvolver soluções para problemas através de *divide-and-conquer* ou *decrease-and-conquer*, reduzindo o problema para versões simplificadas do mesmo problema
 
 - Semanticamente: Uma técnica de programação onde a função **chama a si mesmo**
-	- Em Programação, o objetivo é não ter recursão infinita
-		- Deve ter **1 ou mais casos bases** que são fáceis de resolver
-		- Deve resolver o mesmo problema em algum outro input com o objetivo de simplificar o input do problema maior
-
-  
+- Em Programação, o objetivo é não ter recursão infinita
+- Deve-se ter **1 ou mais casos bases** que são fáceis de resolver
+- Deve-se resolver o mesmo problema em algum outro *input* com o objetivo de simplificar o *input* do problema maior
 
 ## Recursão em Python
 
 Nós sabemos que em **Python** é possível uma **função** chamar outras **funções**, inclusive é possível que uma função chame ela mesma, esses tipos de constructos são chamados de **funções recursivas**.
 
-A seguir temos o exemplo de uma função que descobre o fatorial de um inteiro. Fatorial de um número é produto de todos inteiros de 1 até esse número. Por exemplo, o fatorial de 5 (denotado por 5!) é 1x2x3x4x5 = 120
+A seguir temos o exemplo de uma função que descobre o fatorial de um inteiro. Fatorial de um número é produto de todos inteiros de 1 até esse número. Por exemplo, o fatorial de **5** (denotado por `5!`) é `1x2x3x4x5 = 120`.
 
 Exemplo de uma **função recursiva**:
 
@@ -430,7 +513,6 @@ def fatorial(x):
     Essa é uma função recursiva
     Ela calcula o fatorial de um número inteiro
     """
-
     if x == 1:
         return 1
     else:
@@ -442,7 +524,7 @@ print("O fatorial de {0} é {1}".format(y,fatorial(y))) # O fatorial de 4 é 24
 print("O fatorial de {0} é {1}".format(z,fatorial(z))) # O fatorial de 7 é 3628800
 ```
 
-No exemplo acima **fatorial()** é considerada uma **função recursiva**, pois chama a ela mesma. Quando nós chamamos essa função com um inteiro positivo, ela chamará recursivamente ela mesma diminuindo o número. Para entendermos melhor, veja 
+No exemplo acima **fatorial()** é considerada uma **função recursiva**, pois chama a ela mesma. Quando nós chamamos essa função com um inteiro positivo, ela chamará recursivamente ela mesma diminuindo o número. Para entendermos melhor, veja o cálculo que ocorre:
 
 ```python
 fatorial(4)              # Primeira chamada com 4
@@ -457,26 +539,32 @@ fatorial(4)              # Primeira chamada com 4
 
 Como podem ver, nossa recursão acaba quando o valor de **y** reduz a **1**, essa é considerada a **condição base**. Toda recursão deve ter uma condição base que para a recursão ou a função ficará chamando-a eternamente.
 
- 
-
 ## Recursão com Múltiplos Casos Base
 
-- Números Fibonacci
-- Leonardo de Pisa (também conhecido como Fibonacci) modelou o seguinte desafio:
-	- Pares de coelhos recém-nascidos (um macho e uma fêmea) são colocados em um curral
-	- Coelhos se acasalam na idade de um mês
-	- Coelhos tem um mês de período de gestação
-	- Assumindo que o coelho nunca morre, a fêmea sempre produz um novo par (um macho e uma fêmea) a cada mês a partir do segundo mês
-	- Quantos coelhos fêmeas estão lá no final do ano?
+Como já vimos, um **caso de base** é um cenário de encerramento que não usa recursão para produzir uma resposta, podemos ter um ou mais desses cenários em nossas funções.
 
-### Fibonacci
+Na matemática, a Sucessão de Fibonacci (ou Sequência de Fibonacci), é uma sequência de números inteiros, começando normalmente por 0 e 1, na qual, cada termo subsequente corresponde à soma dos dois anteriores. A sequência recebeu o nome do matemático italiano Leonardo de Pisa.
 
-1. Depois de um mês (chama ele de 0) - 1 fêmea
+Fibonacci modelou o seguinte desafio:
+
+- Pares de coelhos recém-nascidos (um macho e uma fêmea) são colocados em um curral
+- Coelhos se acasalam na idade de um mês
+- Coelhos tem um mês de período de gestação
+- Assumindo que o coelho nunca morre, a fêmea sempre produz um novo par (um macho e uma fêmea) a cada mês a partir do segundo mês
+- Quantos coelhos fêmeas estão lá no final do ano?
+
+### Fibonacci em Python
+
+Vamos então definir o problema, para que seja mais fácil solucioná-lo:
+
+1. Depois de um mês (chamamos ele de **0**) = 1 fêmea
 2. Depois do segundo mês, ainda 1 fêmea (agora grávida)
-3. Depois do terceiro, duas fêmeas, uma grávida, uma não
-4. Em geral, fêmeas(n) = fêmeas(n-1) + fêmeas(n-2)
-	- Cada fêmea viva no mês n-2 irá produzir uma fêmea no mês n
-	- Estes podem ser adicionados aqueles vivos no mês n-1 para obter total vivos no mês n
+3. Depois do terceiro, 2 fêmeas, 1 grávida, 1 não-grávida
+4. Em geral, temos então `fêmeas(n) = fêmeas(n-1) + fêmeas(n-2)`
+	- Cada fêmea viva no mês `n-2` irá produzir uma fêmea no mês `n`
+	- Estes podem ser adicionados aqueles vivos no mês `n-1` para obter total vivos no mês `n`
+
+Temos então os seguintes casos:
 
 - Casos Base:
 	- Femeas(0) = 1
@@ -484,19 +572,22 @@ Como podem ver, nossa recursão acaba quando o valor de **y** reduz a **1**, ess
 - Caso Recursivo
 	- Femeas(n) = Femeas(n-1) + Femeas(n-2)
 
+Convertendo para a linguagem Python:
+
 ```python
 def fib(x):
-	"""
-	Assume x como inteiro >= 0
-	Retorna o Fibonacii de x
-	"""
-	if x == 0 or x == 1:
-		return 1
-	else:
-		return fib(x-1) + fib(x-2)
-```
+    """
+    Assume x como inteiro >= 0
+    Retorna o Fibonacci de x
+    """
+    if x == 0 or x == 1:
+        return 1
+    else:
+        return fib(x-1) + fib(x-2)
 
- 
+print(fib(8)) # 34
+print(fib(10)) # 89
+```
 
 ## Vantagens e Desvantagens
 
@@ -512,6 +603,6 @@ def fib(x):
 2. Chamadas recursivas são custosas e ineficientes e podem nos custar muita memória e tempo!
 3. Funções recursivas são mais difíceis de debugar (processo de encontrar e reduzir defeitos de um programa).
 
-Por fim, entendemos que as funções são um tema essencial e fundamental para a programação, elas são capazes de facilitar muito a vida dos programadores através da **abstração**, tornando os códigos muito mais bonitos, modulares e fáceis de entender. O código ainda pode ser utilizados muitas vezes e precisa ser **debuggado/testado** apenas uma vez.
+Por fim, entendemos que as funções são um tema essencial e fundamental para a programação, elas são capazes de facilitar muito a vida dos programadores através da **abstração**, tornando os códigos muito mais elegantes, modulares e fáceis de entender. O código ainda pode ser utilizados muitas vezes e precisa ser **debuggado/testado** apenas uma vez.
 
 Cheque a **[documentação](https://docs.python.org/3/library/functions.html)** oficial do Python para conhecer todas as funções construídas no **interpretador** Python.

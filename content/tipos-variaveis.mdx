@@ -1,26 +1,24 @@
 ---
 title: 'Tipos de Variáveis'
-description: 'This is the meta description'
+description: 'Aprenda sobre os Tipos de Variáveis em Python'
 ---
 
 **Variáveis** são um conceito de extrema importância nas linguagens de programação. 
 
 Variáveis são usadas para armazenar informações a serem referenciadas e manipuladas em um programa de computador. Elas também fornecem uma maneira de rotular dados com um nome descritivo, para que nossos programas possam ser entendidos mais claramente pelo leitor e por nós mesmos. É útil pensar nas variáveis como contêineres que contêm informações. Seu único objetivo é rotular e armazenar dados na memória. Esses dados podem ser usados em todo o seu programa.
 
- 
-
 ## Atribuindo Valores às Variáveis
 
 As variáveis em **Python** não precisam declaração explícita para reservar espaço em memória, a declaração ocorre automaticamente quando você atribui um valor à variável. O sinal de **(=)** é usado para fazer a atribuição de valores.
 
-![img](https://i.ibb.co/b1v1Zhd/var.png)
+![img](https://raw.githubusercontent.com/the-akira/Python-Iluminado/master/Imagens/Variables.png)
 
 Por exemplo:
 
 ```python
 nome = 'Gabriel' # Uma string
 idade = 33    # Um valor inteiro
-altura = 1.71 # Um valor em ponto flutuante
+altura = 1.75 # Um valor em ponto flutuante
 
 print(nome) # Gabriel
 print(idade) # 33
@@ -52,8 +50,6 @@ PI = 3.14
 GRAVIDADE = 9.8
 ```
 
- 
-
 ## Tipos de Variáveis em Python
 
 Em muitas linguagens de programação, as variáveis são [statically typed](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). Isso significa que uma variável é inicialmente declarada como tendo um tipo de dados específico e qualquer valor atribuído a ela durante sua vida útil deve sempre ter esse tipo.
@@ -67,8 +63,6 @@ print(v) # 100
 v = 'agora sou uma string'
 print(v) # agora sou uma string
 ```
-
- 
 
 ## Referências a Objetos
 
@@ -102,7 +96,7 @@ x = 33
 
 Esta atribuição cria um **objeto integer** com o valor `33` e atribui a variável `x` para apontar para este objeto
 
-![img](https://i.ibb.co/wJWVLh7/VAR1.png)
+![img](https://raw.githubusercontent.com/the-akira/Python-Iluminado/master/Imagens/x.png)
 
 Agora vamos considerar o seguinte statement
 
@@ -112,7 +106,7 @@ y = x
 
 Ao executarmos ele, Python não criará outro objeto, ele simplesmente criará um nome simbólico ou referência `y`, no qual aponta para o mesmo objeto que aponta para `x`.
 
-![img](https://i.ibb.co/bHCx22s/VAR2.png)
+![img](https://raw.githubusercontent.com/the-akira/Python-Iluminado/master/Imagens/xy.png)
 
 Imagine agora que façamos essa alteração
 
@@ -122,7 +116,7 @@ y = 13
 
 Dessa vez, Python criará um novo **objeto integer** com o valor `13`, e `y` se tornará uma referência para ele.
 
-![img](https://i.ibb.co/kJR94BY/VAR3.png)
+![img](https://raw.githubusercontent.com/the-akira/Python-Iluminado/master/Imagens/x-y.png)
 
 Agora imagine que venhamos a executar o seguinte statement
 
@@ -132,11 +126,9 @@ x = 'e'
 
 Python criará um **objeto string** com o valor `'e'` e fará de `x` uma referência a ele.
 
-![img](https://i.ibb.co/KXXC4f9/VAR4.png)
+![img](https://raw.githubusercontent.com/the-akira/Python-Iluminado/master/Imagens/x_y.png)
 
 Como podemos observar, não há mais referência ao objeto integer `33`. Quando o número de referências a um objeto cai para zero, ele não está mais acessível. Nesse ponto, sua vida acabou. O Python eventualmente perceberá que é inacessível e recuperará a memória alocada para que possa ser usada para outra coisa. Esse processo é chamado de [garbage collection](https://stackify.com/python-garbage-collection/).
-
- 
 
 ## Identidade dos Objetos
 
@@ -158,8 +150,6 @@ t = 50
 id(t) # 94320283576608
 ```
 
- 
-
 ## Deletando uma Variável
 
 O comando **del** nos permite deletar variáveis.
@@ -173,8 +163,6 @@ del numero
 
 Se eventualmente tentarmos imprimí-la no console com o comando `print()` nos será retornado um erro: `NameError: name 'numero' is not defined`, nos indicando que ela não está mais definida.
 
- 
-
 ## Nomes de Variáveis
 
 Uma variável pode ter um nome curto (como por exemplo **x** ou **y**) e ou nome mais descritivo (**nome**, **idade**, **resultado**).
@@ -185,5 +173,58 @@ Veja as regras para as variáveis
 - Uma variável não pode começar com um número
 - O nome de uma variável pode conter apenas caracteres alpha-numéricos e *underscores* (A-z, 0-9, e _)
 - Nomes de variáveis são *case sensitive* (idade, Idade e IDADE são três variáveis diferentes)
+
+## Variáveis Globais
+
+Em Python, uma variável declarada fora da função ou no escopo global é conhecida como variável global. Isso significa que uma variável global pode ser acessada dentro ou fora da função.
+
+Vejamos um exemplo de como uma variável global é criada em Python:
+
+```python
+x = 'global'
+
+def imprimir():
+    print(f'{x} na função imprimir()')
+
+imprimir()
+print(f'{x} fora da função')
+```
+
+No código acima, criamos **x** como uma variável global e definimos `imprimir()` para imprimir a variável global x. Finalmente, chamamos o `imprimir()` que imprimirá o valor de x, além disso, usamos o comando `print()` que também irá imprimir x.
+
+E se desejarmos alterar o valor de x dentro de uma função?
+
+```python
+x = 3
+
+def add():
+    x = x + 5
+    print(x)
+
+add()
+```
+
+Nos será retornado o seguinte erro:
+
+```
+UnboundLocalError: local variable 'x' referenced before assignment
+```
+
+O *output* apresenta um erro porque o Python trata **x** como uma variável local e **x** também não está definido dentro da função `add()`.
+
+Para solucionar este problema, podemos criar uma variável global dentro de uma função, para isso usamos a palavra-chave **global**:
+
+```python
+x = 3
+
+def add():
+    global x
+    x = x + 5
+    print(x)
+
+add() # 8 
+```
+
+Observe que dessa vez a função tem acesso à variável x, tornando assim possível adicionarmos o número 5.
 
 Agora que você já consegue armazenar valores em variáveis, vamos ver os tipos de dados que existem em **Python** e suas aplicações!

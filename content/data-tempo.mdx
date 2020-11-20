@@ -1,117 +1,125 @@
 ---
 title: 'Data e Tempo'
-description: 'This is the meta description for this page'
+description: 'Aprenda sobre Data e Tempo'
 ---
 
-O módulo **datetime** nos fornece **classes** para manipularmos **data** e **tempo** de maneiras simples e complexas. Enquanto que operações aritméticas de data e tempo são aceitas, o foco da implementação é em uma eficiente extração de membros para formatação de output e manipulação.
+Uma data em Python não é um tipo de dados próprio, mas podemos importar um módulo denominado **[datetime](https://github.com/python/cpython/blob/master/Lib/datetime.py)** para trabalhar com datas como objetos de data.
 
-```python
-from datetime import date
+O módulo **[datetime](https://docs.python.org/3/library/datetime.html)** nos fornece **classes** para manipularmos **data** e **tempo**. Enquanto que operações aritméticas de data e tempo são aceitas, o foco da implementação é em uma eficiente extração de membros para formatação de output e manipulação.
 
-agora = date.today()
-print(agora) # 2018-10-27
-```
-
-Podemos também utilizar dessa forma
+Para entendermos melhor o funcionamento do módulo **datetime**, vamos começar importando ele e apresentando a data atual com o método **today()**:
 
 ```python
 import datetime
 
-d = datetime.datetime.now()
-print(d) # 2018-10-27 20:28:24.463585
+data_atual = datetime.date.today()
+print(data_atual) # 2020-11-18
 ```
 
-Nesse caso a data contém ano, mês, dia, hora, minuto, segundo e microsegundo. O módulo **datetime** tem diversos métodos para retornar informação sobre o objeto data. Por exemplo:
+Observe que ele nos traz o resultado no formato `ano-mês-dia`. Podemos também utilizar o método **now()** para obter também o tempo neste exato momento de execução:
 
 ```python
-print(d.year)
-print(d.strftime("%A"))
+import datetime
+
+agora = datetime.datetime.now()
+print(agora) # 2020-11-18 01:10:28.641213
 ```
 
+Neste exemplo a data contém **ano**, **mês**, **dia**, **hora**, **minuto**, **segundo** e **microsegundo**. O módulo **datetime** tem diversos atributos para retornar informação sobre o objeto data. Por exemplo:
 
+```python
+print(agora.year) # 2020
+print(agora.hour) # 1
+print(agora.minute) # 10
+print(agora.second) # 28
+print(agora.microsecond) # 641213
+print(agora.strftime("%A")) # Wednesday
+```
 
 ## Criando Objetos de Data
 
-Para criarmos uma data podemos usar o construtor **datetime()** do módulo **datetime**. A classe **datetime()** espera que passemos três parâmetros para criarmos uma data, são eles: ano, mês e dia.
+Para criarmos uma data podemos usar o construtor **datetime()** do módulo **datetime**. A classe **datetime()** espera que passemos três parâmetros para criarmos uma data, são eles: **ano**, **mês** e **dia**.
 
 ```python
 import datetime
 
-d = datetime.date(2016, 5, 20)
-print(d) # 2016-05-20
+data = datetime.date(2016, 5, 20)
+print(data) # 2016-05-20
 ```
 
-A classe **datetime()** também pode receber parâmetros para tempo e timezone (hora, minuto, segundo, microsegundo, tzone), porém eles são opcionais.
+A classe **datetime()** também pode receber parâmetros para tempo e timezone (hora, minuto, segundo, microsegundo, tzone), porém eles são opcionais:
 
-Obtendo o dia de hoje através do método `date.today()`
+```python
+d = datetime.datetime(2016, 5, 20, 2, 30, 55, 3333)
+print(d.hour) # 2
+```
+
+Vamos novamente obter o dia de hoje através do método **date.today()**:
 
 ```python
 hoje = datetime.date.today()
-print(hoje) # 2019-05-10
-print(hoje.year) # 2019
-print(hoje.day) # 10
-
-# Segunda 0 Domingo 6
-print(hoje.weekday()) # 4
-# Segunda 1 Domingo 7
-print(hoje.isoweekday()) # 5
+print(hoje) # 2020-11-18
 ```
 
-Criando um objeto **[timedelta](https://docs.python.org/3/library/datetime.html#timedelta-objects)** através do do construtor `timedelta()`
+Podemos agora o método **weekday()** para obter qual dia da semana temos, ele nos retorna um valor numérico, sendo segunda-feira representada por 0 até domingo representado por 6.
+
+```python
+# Segunda 0 Domingo 6
+print(hoje.weekday()) # 2 (Quarta-feira)
+```
+
+Ele me retornou **2**, pois estou escrevendo este artigo em uma quarta-feira. Outra opção é o método **isoweekday()**, que começa contando a partir de **1**, sendo ele segunda-feira e **7** domingo.
+
+```python
+# Segunda 1 Domingo 7
+print(hoje.isoweekday()) # 3 (Quarta-feira)
+```
+
+Vamos agora criar um objeto **[timedelta](https://docs.python.org/3/library/datetime.html#timedelta-objects)** através do do construtor `timedelta()`:
 
 ```python
 tdelta = datetime.timedelta(days=7)
 ```
 
-Podemos somar o **timedelta** com o nosso dia de hoje para obter uma nova data
+Podemos somar o **timedelta** com o nosso dia de hoje para obter uma nova data, neste exemplo estamos adicionando 7 dias:
 
 ```python
-print(hoje + tdelta) # 2019-05-17
+print(hoje + tdelta) # 2020-11-25
 ```
 
-Também é possível subtrair o **timedelta**
+Também é possível subtrair o **timedelta**:
 
 ```python
-print(hoje - tdelta)
+print(hoje - tdelta) # 2020-11-11
 ```
 
-O construtor **time()** nos permite criar **[Objetos time](https://docs.python.org/3/library/datetime.html#datetime.time)**
+O construtor **time()** nos permite criar **[Objetos time](https://docs.python.org/3/library/datetime.html#datetime.time)**:
 
 ```python
-t = datetime.time(9, 30, 45, 10000)
+tempo = datetime.time(9, 30, 45, 10000)
+```
 
+Imprimindo a hora, minutos, segundos e microsegundos:
+
+```python
 # Imprime a hora
-print(t.hour) # 9
+print(tempo.hour) # 9
 # Imprime os minutos
-print(t.minute) # 30
+print(tempo.minute) # 30
 # Imprime os segundos
-print(t.second) # 45
+print(tempo.second) # 45
 # Imprime os microsegundos
-print(t.microsecond) # 10000
+print(tempo.microsecond) # 10000
 ```
 
-É possível combinar data e tempo para uma construção mais precisa
+É possível combinar data e tempo para uma construção mais precisa:
 
 ```python
-t2 = datetime.datetime(2019, 7, 26, 12, 30, 45, 100000)
-print(t2) # 2019-07-26 12:30:45.100000
-print(t2.date()) # 2019-07-26
-print(t2.time()) # 12:30:45.100000
+t = datetime.datetime(2019, 7, 26, 12, 30, 45, 100000)
+print(t) # 2019-07-26 12:30:45.100000
+print(t.date()) # 2019-07-26
+print(t.time()) # 12:30:45.100000
 ```
-
-Através dos métodos **today()**, **now()** e **utcnow()** podemos obter a data do momento atual
-
-```python
-data_hoje = datetime.datetime.today() 
-data_agora = datetime.datetime.now()
-data_utc_agora = datetime.datetime.utcnow()
-
-print(data_hoje) # 2019-05-10 10:52:23.867904
-print(data_agora) # 2019-05-10 10:52:23.867974
-print(data_utc_agora) # 2019-05-10 13:52:23.868025
-```
-
-O Método **strftime()**
 
 O objeto **datetime** possui um método para formatarmos objetos de data em strings legíveis, este método é chamado de **strftime()** e ele recebe um parâmetro **format** que especificará o formato no qual a string será retornada
 
@@ -119,23 +127,26 @@ O objeto **datetime** possui um método para formatarmos objetos de data em stri
 import datetime
 
 d = datetime.datetime(2013, 4, 11)
-# strftime - Converte Datetime para String
+```
+
+**strftime()** - Converte Datetime para String:
+
+```python
 print(d.strftime("%B")) # April
 ```
 
 Já o método **strptime()** é capaz de converter uma string para um objeto **datetime**
 
 ```python
-# strptime - Converte String para Datetime
 data_string = 'May 10 2019'
 data_convertida = datetime.datetime.strptime(data_string, '%B %d %Y')
 print(data_convertida) # 2019-05-10 00:00:00
 ```
 
-A seguir temos uma referência de todos os formatos legais que podemos utilizar
+A seguir temos uma referência de todos os formatos diferentes que podemos utilizar:
 
 | Formato | Descrição                                                              | Exemplo                  |
-|---------|:---------------------------------:|--------------------------:|
+|---------|:------------------------------------------------------------------------:|--------------------------:|
 | %a      | dia da semana, versão pequena                                          | Wed                      |
 | %A      | dia de semana, versão completa                                         | Wednesday                |
 | %w      | dia de semana como número 0-6, sendo 0 domingo                         | 3                        |
@@ -161,18 +172,17 @@ A seguir temos uma referência de todos os formatos legais que podemos utilizar
 | %X      | Versão local de tempo                                                  | 17:41:00                 |
 | %%      | Um sinal de %                                                          | %                        |
 
-
-
 ## Calendário
 
-Outro módulo muito legal que **Python** nos proporciona é o **calendar**, que nos fornece uma grande variedade de métodos para testarmos diversos calendários com ano e mês.
+Outro módulo muito interessante que **Python** nos proporciona é o **[calendar](https://docs.python.org/3/library/calendar.html)**, que nos fornece uma grande variedade de métodos para testarmos diversos calendários com ano e mês.
+
+Vejamos como podemos obter o calendário do mês Fevereiro do ano de 2014:
 
 ```python
 import calendar
 
 cal = calendar.month(2014, 2)
 print(cal)
-
 #    February 2014
 # Mo Tu We Th Fr Sa Su
 #                 1  2
@@ -186,98 +196,67 @@ print(cal)
 
 Podemos utilizar a função **calendar.calendar()** para imprimirmos o calendário completo para um determinado ano.
 
-```python
-# A função calendar recebe como parâmetro:
+A função calendar recebe como parâmetro:
 
-## ano 
-## comprimento da coluna data
-## número de linhas por semana
-## número de espaços entre a coluna mês
-## número de colunas
-print(calendar.calendar(2019, 2, 2, 6, 3))
+- ano
+- comprimento da coluna data
+- número de linhas por semana
+- número de espaços entre a coluna mês
+- número de colunas
+
+```python
+print(calendar.calendar(2019, 1, 1, 6, 3))
 ```
 
 Nos é trazido como output:
 
 ```
       January                   February                   March
-
 Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
-
     1  2  3  4  5  6                   1  2  3                   1  2  3
-
  7  8  9 10 11 12 13       4  5  6  7  8  9 10       4  5  6  7  8  9 10
-
 14 15 16 17 18 19 20      11 12 13 14 15 16 17      11 12 13 14 15 16 17
-
 21 22 23 24 25 26 27      18 19 20 21 22 23 24      18 19 20 21 22 23 24
-
 28 29 30 31               25 26 27 28               25 26 27 28 29 30 31
 
-
-
        April                      May                       June
-
 Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
-
  1  2  3  4  5  6  7             1  2  3  4  5                      1  2
-
  8  9 10 11 12 13 14       6  7  8  9 10 11 12       3  4  5  6  7  8  9
-
 15 16 17 18 19 20 21      13 14 15 16 17 18 19      10 11 12 13 14 15 16
-
 22 23 24 25 26 27 28      20 21 22 23 24 25 26      17 18 19 20 21 22 23
-
 29 30                     27 28 29 30 31            24 25 26 27 28 29 30
 
-
-
         July                     August                  September
-
 Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
-
  1  2  3  4  5  6  7                1  2  3  4                         1
-
  8  9 10 11 12 13 14       5  6  7  8  9 10 11       2  3  4  5  6  7  8
-
 15 16 17 18 19 20 21      12 13 14 15 16 17 18       9 10 11 12 13 14 15
-
 22 23 24 25 26 27 28      19 20 21 22 23 24 25      16 17 18 19 20 21 22
-
 29 30 31                  26 27 28 29 30 31         23 24 25 26 27 28 29
-
                                                     30
 
-
-
       October                   November                  December
-
 Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
-
     1  2  3  4  5  6                   1  2  3                         1
-
  7  8  9 10 11 12 13       4  5  6  7  8  9 10       2  3  4  5  6  7  8
-
 14 15 16 17 18 19 20      11 12 13 14 15 16 17       9 10 11 12 13 14 15
-
 21 22 23 24 25 26 27      18 19 20 21 22 23 24      16 17 18 19 20 21 22
-
 28 29 30 31               25 26 27 28 29 30         23 24 25 26 27 28 29
-
                                                     30 31
 ```
 
-Checando por um Ano Bissexto
+### Checando por um Ano Bissexto
 
 A função **isleap()** checa se um ano é bissexto ou não. Para utilizarmos ela é necessário passarmos um ano como argumento e ela nos retornará `True` se ele for bissexto e `False` caso não seja. 
 
-Vamos checar o ano de 2017
+Vamos checar o ano de 2017:
 
 ```python
 print(calendar.isleap(2017)) # False
 ```
 
-Retornando o Dia da Semana
+### Retornando o Dia da Semana
 
 O método **weekday()** recebe três argumentos: **ano**, **mês** e **dia** e nos retorna o dia da semana como índice **0-6** em que:
 
@@ -293,11 +272,11 @@ O método **weekday()** recebe três argumentos: **ano**, **mês** e **dia** e n
 print(calendar.weekday(2019,8,19)) # 0
 ```
 
-
-
 ## Biblioteca pytz
 
-A **[Biblioteca pytz](http://pytz.sourceforge.net/)** nos permite a execução de cálculos de **[timezone](https://www.timeanddate.com/time/map/)**. Para obtermos a biblioteca pytz é necessário que façamos sua instalação através do **pip** ou **pipenv**
+A **[Biblioteca pytz](http://pytz.sourceforge.net/)** nos permite a execução de cálculos de **[timezone](https://www.timeanddate.com/time/map/)**. Para obtermos a biblioteca pytz é necessário que façamos sua instalação através de um gerenciador de pacotes como **pip** ou **pipenv**.
+
+A instalação é feita com um simples comando:
 
 ```
 pip install pytz
@@ -314,21 +293,21 @@ data_tz = datetime.datetime(2019, 7, 20, 12, 30, 45, tzinfo=pytz.UTC)
 print(data_tz) # 2019-07-20 12:30:45+00:00
 ```
 
-Obtendo a data e tempo de agora com a zona de tempo
+Obtendo a data e tempo de agora com o fuso horário:
 
 ```python
 data_agora_tz = datetime.datetime.now(tz=pytz.UTC)
-print(data_agora_tz) # 2019-05-10 14:04:31.208341+00:00
+print(data_agora_tz) # 2020-11-18 04:42:53.479759+00:00
 ```
 
-Podemos converter para uma outra zona de tempo, nesse caso estamos trocando para 'America/Sao_Paulo'
+Podemos converter para uma outro fuso horário, nesse caso estamos trocando para 'America/Sao_Paulo':
 
 ```python
 dt_conversao = data_agora_tz.astimezone(pytz.timezone('America/Sao_Paulo'))
-print(dt_conversao) # 2019-05-10 08:04:31.208341-06:00
+print(dt_conversao) # 2020-11-18 01:42:53.479759-03:00
 ```
 
-Para obtermos todas as zonas de tempo disponíveis, podemos percorrê-las com o loop for
+Para obtermos todas os fusos horários disponíveis, podemos percorrê-las com o **for loop**:
 
 ```python
 for tz in pytz.all_timezones:
@@ -351,9 +330,205 @@ WET
 Zulu
 ```
 
+### UTC e Fusos Horários
 
+UTC é o padrão de tempo contra o qual todas as marcações de tempo do mundo são sincronizadas (ou coordenadas). Não é, em si, um fuso horário, mas sim um padrão transcendente que define o que são os fusos horários.
 
-Com este rápido estudo, podemos concluir que **Python** nos traz grandes possibilidades de manipularmos data e tempo, que são aspectos bastante importantes da programação e computação.
+O tempo UTC é medido com precisão usando o [tempo astronômico](https://www.merriam-webster.com/dictionary/astronomical%20time), referindo-se à rotação da Terra e [relógios atômicos](https://en.wikipedia.org/wiki/Atomic_clock).
 
-**Próximo Capítulo**: [Classes e Objetos](https://github.com/the-akira/Python-Iluminado/blob/master/Capitulos/22.ClassesObjetos.md)
+Os fusos horários são então definidos por seu deslocamento em relação ao UTC. Por exemplo, nas Américas do Norte e do Sul, o Fuso Horário Central (CT) está atrasado em cinco ou seis horas do UTC e, portanto, usa a notação `UTC-5:00` ou `UTC-6:00`.
 
+Um fuso horário é uma região do globo que observa um horário padrão uniforme para fins legais, comerciais e sociais. Os fusos horários tendem a seguir as fronteiras dos países e suas subdivisões, em vez de seguir estritamente a longitude, porque é conveniente para áreas próximas de comunicação comercial ou outra manter o mesmo tempo. A França, incluindo seus territórios ultramarinos, tem o maior fuso horário de qualquer país, com um total de 12.
+
+Como mencionado, a maioria dos fusos horários em terra são deslocados do [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) (UTC) por um número inteiro de horas (UTC−12:00 a UTC+14:00), mas alguns fusos são deslocados em 30 ou 45 minutos (por exemplo, Newfoundland Time Zone é UTC−03:30, Nepal Standard Time é UTC+05:45, o  Indian Standard Time é UTC+05:30).
+
+Alguns países com latitudes mais altas e zonas temperadas usam o horário de verão durante parte do ano, normalmente ajustando o relógio local em uma hora. Muitos fusos horários terrestres são desviados para o oeste dos fusos horários náuticos correspondentes. Isso também cria um efeito de horário de verão permanente.
+
+## O Módulo time
+
+O módulo **[time](https://docs.python.org/3/library/time.html)** nos fornece várias funções relacionadas ao tempo.
+
+O módulo time representa objetos baseados em tempo em Python. Os desenvolvedores usam a função **time()** para retornar a hora atual como um [UNIX timestamp](https://www.unixtimestamp.com/). A função **ctime()** converte um UNIX timestamp em um formato padrão de ano, mês, dia e hora.
+
+O UNIX timestamp é uma maneira de controlar o tempo como um total de segundos em execução. Essa contagem começa na [Unix Epoch](https://en.wikipedia.org/wiki/Unix_time) em 1º de janeiro de 1970 no UTC. Portanto, o registro de data e hora do Unix é meramente o número de segundos entre uma data específica e a Unix Epoch. Também deve ser salientado que este momento tecnicamente não muda, não importa onde você esteja no globo. Isso é muito útil para sistemas de computador para rastrear e classificar informações datadas em aplicativos dinâmicos e distribuídos, tanto online quanto do lado do cliente.
+
+Sabendo disso, o módulo time nos permite executar ações como recuperar a hora atual e criar uma pausa no programa. Para que possamos usá-lo é necessário importá-lo (sem a necessidade de instalação):
+
+```python
+import time
+```
+
+### A Função time()
+
+A função Python **time()** retorna a hora atual. O tempo é representado como o número de segundos desde 1º de janeiro de 1970. Este é o ponto em que o tempo UNIX começa, também chamado de "epoch".
+
+Imagine que queremos recuperar a hora neste momento. Podemos fazer isso usando este script:
+
+```python
+import time
+
+tempo_atual = time.time()
+print(tempo_atual) # 1605681228.273571
+```
+
+Observe que nosso programa não retornou um horário regular, como `11:50`. Nosso programa retornou um número de ponto flutuante (em outras palavras, um número decimal).
+
+Este número de ponto flutuante é o número de segundos desde o início da "epoch".
+
+Na programação, o *epoch time* é uma forma padrão de representar o tempo. O módulo time não precisa levar em conta os fusos horários.Isso ocorre porque o *epoch time* armazena apenas o número de segundos desde a data e hora mencionadas anteriormente. Nenhum dados de fuso horário é armazenado, como o *Coordinated Universal Time*, ao lado de um valor de epoch.
+
+### A Função ctime()
+
+O *epoch time* não é legível para a maioria dos humanos. Podemos ajustar o epoch time para a hora local usando a função Python **ctime()**.
+
+A função **ctime()** aceita um argumento: este argumento é o número de segundos desde o início da epoch e retorna uma string com a hora local. Este valor é baseado no fuso horário do computador.
+
+Suponha que queremos converter nosso número de ponto flutuante da epoch anterior em um timestamp:
+
+```python
+import time
+
+epoch_time = 1605681228.273571
+local_time =  time.ctime(epoch_time)
+
+print(f'O tempo local é: {local_time}')
+# O tempo local é: Wed Nov 18 03:33:48 2020
+```
+
+### A Função sleep()
+
+Uma das funções mais comuns do módulo time é a função **sleep()**, capaz de suspender a execução de um programa por um determinado número de segundos.
+
+Imagine que desejamos imprimir a frase "Desconectando do sistema..." e então esperar 4 segundos e depois imprimir "Desconectado com sucesso", podemos fazê facilmente com a ajuda da função **sleep()**:
+
+```python
+import time 
+
+print("Desconectando do sistema...")
+time.sleep(4)
+print("Desconectado com sucesso")
+```
+
+Este script funciona da seguinte forma:
+
+- "Desconectando do sistema..." é impresso no console
+- O programa pausa por 4 segundos
+- Por fim, "Desconectado com sucesso" é impresso no console
+
+A função **sleep()** aceita valores de número de ponto flutuante (decimal) ou inteiro (inteiro).
+
+### O Objeto struct_time
+
+O objeto **struct_time** é útil porque permite que possamos trabalhar com uma forma padronizada ao usar timestamps.
+
+A seguir temos os valores que o objeto **struct_time** pode armazenar:
+
+- **tm_year**: ano
+- **tm_mon**: mês
+- **tm_mday**: dia do mês
+- **tm_hour**: hora
+- **tm_min**: minutos
+- **tm_sec**: segundos
+- **tm_wday**: dia da semana (começa por 0, que é segunda)
+- **tm_yday**: dia do ano
+- **tm_isdst**: tempo em horário de verão
+
+Podemos acessar todos esses atributos por meio de um objeto struct_time.
+
+#### A Função **localtime()**
+
+Agora, imagine que desejamos converter o *epoch time* em horário local e fazer com que o resultado retorne um objeto struct_time. Podemos fazer isso usando as funções **localtime()** ou **gmtime()**.
+
+A função **localtime()** aceita um *epoch time* e retorna um objeto **struct_time**.
+
+Imagine que desejamos obter o dia da semana atual, a hora e os minutos da hora. Podemos fazê-lo da seguinte forma:
+
+```python
+import time 
+
+tempo_atual = time.localtime(1605681228.273571)
+print(f'Dia da semana: {tempo_atual.tm_wday}') # Dia da semana: 2
+print(f'Hora: {tempo_atual.tm_hour}') # Hora: 3
+print(f'Minuto da hora: {tempo_atual.tm_min}') # Minuto da hora: 33
+```
+
+#### A Função **gmtime()**
+
+A função **gmtime()** funciona da mesma maneira que a função **localtime()**, retornando um objeto struct_time de um *epoch time*
+
+Digamos que queremos encontrar o ano, mês do ano e o dia do mês:
+
+```python
+import time 
+
+tempo_atual = time.localtime(1605681228.273571)
+print(f'Ano: {tempo_atual.tm_year}') # Ano: 2020
+print(f'Mês do ano: {tempo_atual.tm_mon}') # Mês do ano: 11
+print(f'Dia do mês: {tempo_atual.tm_mday}') # Dia do mês: 18
+```
+
+#### A Função **asctime()**
+
+A função **asctime()** converte um objeto struct_time em uma string formatada. Vamos considerar o seguinte exemplo:
+
+```python
+import time 
+
+tempo_atual = time.localtime(1605681228.273571)
+tempo_formatado = time.asctime(tempo_atual)
+print(tempo_formatado) # Wed Nov 18 03:33:48 2020
+```
+
+#### A Função **strftime()**
+
+A função **strftime()** formato os valores em um objeto **struct_time** para uma string em particular.
+
+Digamos que queremos transformar um objeto struct_time em uma string com o seguinte formato: `Dia/Mês/Ano`:
+
+```python
+import time 
+
+tempo_atual = time.localtime()
+tempo_final = time.strftime("%d/%m/%Y",tempo_atual)
+print(tempo_final) # 18/11/2020
+```
+
+Neste exemplo:
+
+- `%d`: indica o dia do mês
+- `%m`: indica o mês
+- `%Y`: indica o ano
+
+Também podemos usar outros valores, como:
+
+- `%H`: indica a hora do dia
+- `%M`: indica os minutos da hora
+- `%S`: indica os segundos do minuto
+
+### Medindo Performance
+
+É possível usarmos o módulo time para medir a performance de programas.
+
+A maneira de fazer isso é usando **perf_counter()** que, como o nome sugere, fornece um contador de desempenho com alta resolução para medir distâncias curtas de tempo.
+
+Para usar **perf_counter()**, colocamos um contador antes do início da execução do código, bem como após a conclusão da execução do código, por exemplo:
+
+```python
+import time
+
+def func():
+    for i in range(1,10):
+        time.sleep(i)
+
+inicio = time.perf_counter()
+func()
+fim = time.perf_counter()
+tempo_de_execucao = (fim - inicio)
+print(tempo_de_execucao) # 45.035479626996676
+```
+
+Primeiramente, **inicio** captura o momento antes da chamada da função, **fim** captura o momento após o retorno da função. O tempo total de execução da função leva `(fim - inicio)` segundos.
+
+perf_counter() é a maneira mais precisa de medir o desempenho de um código usando uma execução. No entanto, se estamos tentando avaliar com precisão o desempenho de um snippet de código, é recomendado usar o módulo Python [timeit](https://docs.python.org/3/library/timeit.html).
+
+Com este rápido estudo, podemos concluir que **Python** nos traz uma grande versatilidade para manipularmos data e tempo, que são aspectos bastante importantes da programação e computação, para mais detalhes visite a documentação oficial das bibliotecas.
