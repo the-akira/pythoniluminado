@@ -38,5 +38,9 @@ export default {
   h6: {
     ...headingBase,
     fontSize: 0
+  },
+  img: {
+    maxWidth: '100%',
+    height: 'auto',
   }
 };
